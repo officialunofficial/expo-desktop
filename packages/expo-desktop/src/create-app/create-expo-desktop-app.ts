@@ -927,22 +927,39 @@ function logProjectReady({
   packageManager,
 }: {
   cdPath: string;
-  packageManager: "npm" | "bun" | "pnpm";
+  packageManager: "npm" | "bun" | "pnpm" | "yarn";
 }) {
   const lines = [
     "✅ Your project is ready!",
     "",
-    `To run your project, navigate to the directory and run one of the following ${packageManager} commands.`,
+    "To run your project, first navigate to the directory and start up the packager:",
     "",
     `- cd ${cdPath}`,
-    `- ${packageManager} start`,
-    `- ${packageManager} run macos`,
-    `- ${packageManager} run windows`,
-    `- ${packageManager} run android`,
-    `- ${packageManager} run ios`,
-    `- ${packageManager} run web`,
+    `- ${formatRunCommand(packageManager, "start")}`,
+    "",
+    "… and then run the target platform of your choice:",
+    "",
+    `- ${formatRunCommand(packageManager, "android")}`,
+    `- ${formatRunCommand(packageManager, "ios")}`,
+    `- ${formatRunCommand(packageManager, "web")}`,
+    `- ${formatRunCommand(packageManager, "macos")}`,
+    `- ${formatRunCommand(packageManager, "windows")}`,
     "",
   ];
 
   log.success(lines.join("\n"), { withGuide: false });
+}
+
+export function formatRunCommand(packageManager: "npm" | "bun" | "pnpm" | "yarn", cmd: string) {
+  switch (packageManager) {
+    case "pnpm":
+      return `pnpm run ${cmd}`;
+    case "yarn":
+      return `yarn ${cmd}`;
+    case "bun":
+      return `bun run ${cmd}`;
+    case "npm":
+    default:
+      return `npm run ${cmd}`;
+  }
 }
