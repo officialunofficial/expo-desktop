@@ -155,6 +155,8 @@ export async function createExpoDesktopApp({
 
   title("Adding Expo support to the Babel config…", { spacing: 1 });
   await writeBabelConfig({ projectPath });
+
+  logProjectReady({ cdPath: name.filesafeName, packageManager });
 }
 
 async function getBundleEntryFileCandidates({ projectPath }: { projectPath: string }) {
@@ -918,4 +920,46 @@ await applyConfigPlugins(info);
     `.trim() + "\n",
     "utf-8",
   );
+}
+
+function logProjectReady({
+  cdPath,
+  packageManager,
+}: {
+  cdPath: string;
+  packageManager: "npm" | "bun" | "pnpm" | "yarn";
+}) {
+  const lines = [
+    "✅ Your project is ready!",
+    "",
+    "To run your project, first navigate to the directory and start up the packager:",
+    "",
+    `- cd ${cdPath}`,
+    `- ${formatRunCommand(packageManager, "start")}`,
+    "",
+    "… and then run the target platform of your choice:",
+    "",
+    `- ${formatRunCommand(packageManager, "android")}`,
+    `- ${formatRunCommand(packageManager, "ios")}`,
+    `- ${formatRunCommand(packageManager, "web")}`,
+    `- ${formatRunCommand(packageManager, "macos")}`,
+    `- ${formatRunCommand(packageManager, "windows")}`,
+    "",
+  ];
+
+  log.success(lines.join("\n"), { withGuide: false });
+}
+
+export function formatRunCommand(packageManager: "npm" | "bun" | "pnpm" | "yarn", cmd: string) {
+  switch (packageManager) {
+    case "pnpm":
+      return `pnpm run ${cmd}`;
+    case "yarn":
+      return `yarn ${cmd}`;
+    case "bun":
+      return `bun run ${cmd}`;
+    case "npm":
+    default:
+      return `npm run ${cmd}`;
+  }
 }
