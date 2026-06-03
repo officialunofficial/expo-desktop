@@ -1,5 +1,13 @@
 # expo-desktop-prebuild-config
 
+## 1.0.17
+
+### Patch Changes
+
+- Fix react and react-native versions in the 0.81 starter project
+- Updated dependencies
+  - expo-desktop-config-plugins@1.1.31
+
 ## 1.0.16
 
 ### Patch Changes

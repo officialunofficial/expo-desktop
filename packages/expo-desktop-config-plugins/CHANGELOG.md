@@ -1,5 +1,11 @@
 # expo-desktop-config-plugins
 
+## 1.1.31
+
+### Patch Changes
+
+- Fix react and react-native versions in the 0.81 starter project
+
 ## 1.1.30
 
 ### Patch Changes

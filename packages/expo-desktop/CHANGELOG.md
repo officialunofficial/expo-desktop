@@ -1,5 +1,15 @@
 # expo-desktop
 
+## 0.1.34
+
+### Patch Changes
+
+- aceb2c8: adds support for yarn
+- Fix react and react-native versions in the 0.81 starter project
+- Updated dependencies
+  - expo-desktop-config-plugins@1.1.31
+  - expo-desktop-prebuild-config@1.0.17
+
 ## 0.1.33
 
 ### Patch Changes

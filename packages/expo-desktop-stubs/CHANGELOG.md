@@ -1,5 +1,13 @@
 # expo-desktop-stubs
 
+## 54.0.10
+
+### Patch Changes
+
+- Fix react and react-native versions in the 0.81 starter project
+- Updated dependencies
+  - expo-desktop-modules-core@54.0.10
+
 ## 54.0.9
 
 ### Patch Changes
