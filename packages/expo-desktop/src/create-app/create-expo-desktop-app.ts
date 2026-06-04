@@ -156,6 +156,9 @@ export async function createExpoDesktopApp({
   title("Adding Expo support to the Babel config…", { spacing: 1 });
   await writeBabelConfig({ projectPath });
 
+  title("Improving App.tsx…", { spacing: 1 });
+  await improveAppTsx({ projectPath });
+
   logProjectReady({ cdPath: name.filesafeName, packageManager });
 }
 
@@ -843,6 +846,58 @@ module.exports = function (api) {
   }
 
   console.log(`\n${green("◆")}  Wrote babel.config.js.\n`);
+}
+
+/**
+ * Improve the App.tsx so that it's not white-on-white on macOS in dark mode.
+ * Here, we simply ensure that it's black-on-white in both light and dark modes.
+ *
+ * @see https://github.com/shirakaba/expo-desktop/pull/14#issuecomment-4614018796
+ * @see https://github.com/expo/expo/blob/sdk-54/templates/expo-template-blank-typescript/App.tsx
+ */
+async function improveAppTsx({ projectPath }: { projectPath: string }) {
+  const metroConfigPath = path.resolve(projectPath, "App.tsx");
+
+  console.log(`${cyan("◆")}  Overwriting App.tsx…\n`);
+
+  try {
+    await fs.writeFile(
+      metroConfigPath,
+      `
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Open up App.tsx to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: '#000',
+  },
+});
+    `.trim() + "\n",
+      "utf-8",
+    );
+  } catch (error) {
+    log.error(
+      `Error improving ${yellow("App.tsx")} file${error instanceof Error ? `: ${error.message}` : "."}`,
+    );
+    process.exit(1);
+  }
+
+  console.log(`\n${green("◆")}  Overwrote App.tsx.\n`);
 }
 
 /**
