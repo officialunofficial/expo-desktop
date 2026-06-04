@@ -1,5 +1,14 @@
 # expo-desktop
 
+## 0.1.35
+
+### Patch Changes
+
+- Fix dark mode styling in starter template on macOS; commit changes upon app creation; suppress library version warnings upon expo start.
+- Updated dependencies
+  - expo-desktop-config-plugins@1.1.32
+  - expo-desktop-prebuild-config@1.0.18
+
 ## 0.1.34
 
 ### Patch Changes

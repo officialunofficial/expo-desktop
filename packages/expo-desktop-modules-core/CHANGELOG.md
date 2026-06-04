@@ -1,5 +1,11 @@
 # expo-desktop-modules-core
 
+## 54.0.11
+
+### Patch Changes
+
+- Fix dark mode styling in starter template on macOS; commit changes upon app creation; suppress library version warnings upon expo start.
+
 ## 54.0.10
 
 ### Patch Changes
