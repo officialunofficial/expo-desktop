@@ -51,8 +51,9 @@
     "build": "tsgo --declaration --emitDeclarationOnly --allowJs --outDir types"
   },
   "dependencies": {
-    "@expo/json-file": "^10.0.13",
-    "@expo/plist": "^0.4.8",
+    "@expo/config-plugins": "catalog:expo-latest",
+    "@expo/json-file": "catalog:expo-latest",
+    "@expo/plist": "catalog:expo-latest",
     "chalk": "^4.1.2",
     "debug": "^4.3.4",
     "fast-xml-builder": "^1.2.0",
@@ -63,15 +64,10 @@
     "xcode": "^3.0.1"
   },
   "devDependencies": {
-    "@expo/config-plugins": "catalog:react-native-81",
-    "@expo/config-types": "catalog:react-native-81",
+    "@expo/config-types": "catalog:expo-latest",
     "@tsconfig/node24": "catalog:base",
     "@types/debug": "^4.1.7",
     "@types/node": "catalog:base",
     "@typescript/native-preview": "catalog:base"
-  },
-  "peerDependencies": {
-    "@expo/config-plugins": ">=54.0.0",
-    "@expo/config-types": ">=54.0.0"
   }
 }

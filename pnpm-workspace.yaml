@@ -52,25 +52,32 @@ catalogs:
   # be our least bad option for 0.84.
   # https://github.com/expo/expo/blob/sdk-56/templates/expo-template-bare-minimum/package.json
   react-native-84:
-    "@expo/config": ~56.0.0-preview.12
-    "@expo/config-plugins": ^56.0.5
-    "@expo/config-types": ^56.0.4
-    "@expo/prebuild-config": ^56.0.8
+    "@expo/config-plugins": ^56.0.8
+    "@expo/config-types": ^56.0.5
+    "@expo/config": ^56.0.9
+    "@expo/prebuild-config": ^56.0.15
     "@react-native/metro-config": ~0.84.1
     "@types/react": ~19.2.0
-    expo: ~56.0.0-preview.12
+    expo: ^56.0.9
     react: 19.2.3
     react-native: 0.84.1
   react-native-85:
-    "@expo/config": ~56.0.0-preview.12
-    "@expo/config-plugins": ^56.0.5
-    "@expo/config-types": ^56.0.4
-    "@expo/prebuild-config": ^56.0.8
+    "@expo/config-plugins": ^56.0.8
+    "@expo/config-types": ^56.0.5
+    "@expo/config": ^56.0.9
+    "@expo/prebuild-config": ^56.0.15
     "@react-native/metro-config": ~0.84.1
     "@types/react": ~19.2.0
-    expo: ~56.0.0-preview.12
+    expo: ^56.0.9
     react: 19.2.3
     react-native: 0.85.3
+  expo-latest:
+    "@expo/config-plugins": ^56.0.8
+    "@expo/config-types": ^56.0.5
+    "@expo/config": ^56.0.9
+    "@expo/json-file": "^10.2.0"
+    "@expo/plist": "^0.7.0"
+    "@expo/prebuild-config": ^56.0.15
 
 # Formerly onlyBuiltDependencies/neverBuiltDependencies/ignoredBuiltDependencies
 allowBuilds:
