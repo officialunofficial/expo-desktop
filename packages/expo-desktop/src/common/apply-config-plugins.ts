@@ -1,5 +1,4 @@
 import { createRequire } from "node:module";
-import * as path from "node:path";
 
 import { withInternal } from "./with-internal.ts";
 
@@ -8,6 +7,10 @@ const { getPrebuildConfigAsync } =
   require("expo-desktop-prebuild-config") as typeof import("expo-desktop-prebuild-config");
 const { compileModsAsync } =
   require("expo-desktop-config-plugins") as typeof import("expo-desktop-config-plugins");
+
+// These are subdependencies of expo-desktop-prebuild-config.
+const { getConfig } = require("@expo/config") as typeof import("@expo/config");
+const { withPlugins } = require("@expo/config-plugins") as typeof import("@expo/config-plugins");
 
 /**
  * Applies config plugins.
@@ -18,35 +21,7 @@ export async function applyConfigPlugins(
 ): Promise<Awaited<ReturnType<typeof compileModsAsync>> | undefined> {
   const { projectRoot } = options;
 
-  // To avoid making expo-desktop depend on Expo SDK 54 when we might be running
-  // on an Expo 55 project, we import Expo deps from the project itself.
-  let expoConfigModule: typeof import("@expo/config");
-  try {
-    expoConfigModule = require(
-      path.dirname(require.resolve("@expo/config/package.json", { paths: [projectRoot] })),
-    );
-  } catch (cause) {
-    throw new Error(
-      `Error importing "@expo/config" relative to projectRoot "${projectRoot}". Make sure to install node modules before running any prebuilds, and make sure that the project depends on the package named "expo".`,
-      { cause },
-    );
-  }
-  const { getConfig } = expoConfigModule;
-
-  let expoConfigPluginsModule: typeof import("@expo/config-plugins");
-  try {
-    expoConfigPluginsModule = require(
-      path.dirname(require.resolve("@expo/config-plugins/package.json", { paths: [projectRoot] })),
-    );
-  } catch (cause) {
-    throw new Error(
-      `Error importing "@expo/config-plugins" relative to projectRoot "${projectRoot}". Make sure to install node modules before running any prebuilds, and make sure that the project depends on the package named "expo".`,
-      { cause },
-    );
-  }
-  const { withPlugins } = expoConfigPluginsModule;
-
-  // (1) Filter out platforms that aren't in the app.json.
+  // Filter out platforms that aren't in the app.json.
   // https://github.com/expo/expo/blob/8dd645080f52927e2a8bf406167da7241a1d46d8/packages/%40expo/cli/src/prebuild/prebuildAsync.ts#L74
   let { exp: expoConfig } = getConfig(projectRoot);
   const { platforms, plugins } = expoConfig;

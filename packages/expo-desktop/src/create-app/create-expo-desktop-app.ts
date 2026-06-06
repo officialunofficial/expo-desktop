@@ -994,6 +994,10 @@ const require = createRequire(import.meta.url);
 const { getPrebuildConfigAsync } = require("expo-desktop-prebuild-config");
 const { compileModsAsync } = require("expo-desktop-config-plugins");
 
+// These are subdependencies of expo-desktop-prebuild-config.
+const { getConfig } = require("@expo/config");
+const { withPlugins } = require("@expo/config-plugins");
+
 const projectRoot = import.meta.dirname;
 
 const info = {
@@ -1036,33 +1040,7 @@ const withInternal = (config, internals) => {
 async function applyConfigPlugins(options) {
   const { projectRoot } = options;
 
-  // To avoid making expo-desktop depend on Expo SDK 54 when we might be running
-  // on an Expo 55 project, we import Expo deps from the project itself.
-  /** @type {typeof import("@expo/config")} */
-  let expoConfigModule;
-  try {
-    expoConfigModule = require("@expo/config");
-  } catch (cause) {
-    throw new Error(
-      \`Error importing "@expo/config" relative to projectRoot "\${projectRoot}". Make sure to install node modules before running any prebuilds, and make sure that the project depends on the package named "expo".\`,
-      { cause },
-    );
-  }
-  const { getConfig } = expoConfigModule;
-
-  /** @type {typeof import("@expo/config-plugins")} */
-  let expoConfigPluginsModule;
-  try {
-    expoConfigPluginsModule = require("@expo/config-plugins");
-  } catch (cause) {
-    throw new Error(
-      \`Error importing "@expo/config-plugins" relative to projectRoot "\${projectRoot}". Make sure to install node modules before running any prebuilds, and make sure that the project depends on the package named "expo".\`,
-      { cause },
-    );
-  }
-  const { withPlugins } = expoConfigPluginsModule;
-
-  // (1) Filter out platforms that aren't in the app.json.
+  // Filter out platforms that aren't in the app.json.
   // https://github.com/expo/expo/blob/8dd645080f52927e2a8bf406167da7241a1d46d8/packages/%40expo/cli/src/prebuild/prebuildAsync.ts#L74
   let { exp: expoConfig } = getConfig(projectRoot);
   const { platforms, plugins } = expoConfig;
