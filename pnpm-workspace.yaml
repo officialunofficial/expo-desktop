@@ -66,11 +66,17 @@ catalogs:
     "@expo/config-types": ^56.0.5
     "@expo/config": ^56.0.9
     "@expo/prebuild-config": ^56.0.15
-    "@react-native/metro-config": ~0.84.1
+    "@react-native/metro-config": ~0.85.3
     "@types/react": ~19.2.0
     expo: ^56.0.9
     react: 19.2.3
     react-native: 0.85.3
+    # [officialunofficial] SDK 56 / RN 0.85 macOS via our fork
+    # (officialunofficial/react-native-macos@uno/desktop-0.85-wip). Consumed from a
+    # local verdaccio registry — the fork is a yarn monorepo whose react-native
+    # package (named react-native-macos) has workspace:* deps that file:/git specs
+    # can't resolve; `nx release` to verdaccio publishes it as 0.85.3.
+    react-native-macos: 0.85.3
   expo-latest:
     "@expo/config-plugins": ^56.0.8
     "@expo/config-types": ^56.0.5
