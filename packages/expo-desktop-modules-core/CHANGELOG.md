@@ -1,5 +1,11 @@
 # expo-desktop-modules-core
 
+## 54.0.13
+
+### Patch Changes
+
+- change devDev to dep
+
 ## 54.0.12
 
 ### Patch Changes

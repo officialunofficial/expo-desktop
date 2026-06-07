@@ -1,5 +1,11 @@
 # expo-desktop-config-plugins
 
+## 1.1.34
+
+### Patch Changes
+
+- change devDev to dep
+
 ## 1.1.33
 
 ### Patch Changes

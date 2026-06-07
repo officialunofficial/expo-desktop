@@ -1,5 +1,13 @@
 # expo-desktop-stubs
 
+## 54.0.13
+
+### Patch Changes
+
+- change devDev to dep
+- Updated dependencies
+  - expo-desktop-modules-core@54.0.13
+
 ## 54.0.12
 
 ### Patch Changes

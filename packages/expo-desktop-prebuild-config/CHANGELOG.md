@@ -1,5 +1,13 @@
 # expo-desktop-prebuild-config
 
+## 1.0.20
+
+### Patch Changes
+
+- change devDev to dep
+- Updated dependencies
+  - expo-desktop-config-plugins@1.1.34
+
 ## 1.0.19
 
 ### Patch Changes
